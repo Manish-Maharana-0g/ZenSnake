@@ -1,7 +1,7 @@
 name: Deploy to GitHub Pages
 on:
   push:
-    branches: [ main ] # Change this to 'master' if your main branch is named master
+    branches: [ main ] # Change to 'master' if your branch is named master
 permissions:
   contents: read
   pages: write
@@ -16,10 +16,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Build
+      - name: Install and Build
         run: |
-          # This creates a temporary environment to build your TSX files
-          npx -p vite vite build --base=./
+          # 1. Install the tools listed in your package.json
+          npm install
+          # 2. Build the website
+          npx vite build --base=./
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
