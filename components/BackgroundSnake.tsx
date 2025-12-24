@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 
 const BackgroundSnake: React.FC = () => {
@@ -11,8 +12,18 @@ const BackgroundSnake: React.FC = () => {
 
     let width = window.innerWidth;
     let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
+    
+    const dpr = window.devicePixelRatio || 1;
+    const updateDimensions = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+    };
+
+    updateDimensions();
 
     const numSegments = 12; // Keeping the same short length
     const segments: { x: number; y: number }[] = [];
@@ -24,7 +35,7 @@ const BackgroundSnake: React.FC = () => {
 
     let time = 0;
     const speed = 2.2;
-    const segmentSize = 42; // Increased from 32 to make it "a bit bigger" (thicker)
+    const segmentSize = 42; 
     const slitherFreq = 0.03;
     const slitherAmp = 1.2;
     const minDistanceRatio = 0.38; 
@@ -93,6 +104,7 @@ const BackgroundSnake: React.FC = () => {
         }
       }
 
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
       const accent = getComputedStyle(document.documentElement).getPropertyValue('--m3-accent').trim() || '#D0BCFF';
 
@@ -164,10 +176,7 @@ const BackgroundSnake: React.FC = () => {
     };
 
     const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+      updateDimensions();
     };
 
     window.addEventListener('resize', handleResize);

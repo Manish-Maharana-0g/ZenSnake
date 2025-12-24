@@ -161,15 +161,21 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const dpr = window.devicePixelRatio || 1;
+    const logicalWidth = window.innerWidth;
+    const logicalHeight = window.innerHeight;
+
+    // Reset transform to identity then scale by DPR to ensure sharp drawing
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, logicalWidth, logicalHeight);
 
     ctx.strokeStyle = COLORS.GRID;
     ctx.lineWidth = 1;
-    for (let x = 0; x < canvas.width; x += GRID_SIZE) {
-      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+    for (let x = 0; x < logicalWidth; x += GRID_SIZE) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, logicalHeight); ctx.stroke();
     }
-    for (let y = 0; y < canvas.height; y += GRID_SIZE) {
-      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+    for (let y = 0; y < logicalHeight; y += GRID_SIZE) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(logicalWidth, y); ctx.stroke();
     }
 
     const accentColor = settings.accentColor || COLORS.SNAKE_HEAD;
@@ -299,7 +305,6 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
         for (const obs of currentLevel.obstacles) {
           if (nextHead.x === obs.x && nextHead.y === obs.y) {
             onGameOver(snakeRef.current.length - 3);
-            return;
           }
         }
       }
@@ -337,11 +342,26 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
+    const handleResize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
     
     frameId.current = requestAnimationFrame(gameLoop);
-    return () => cancelAnimationFrame(frameId.current);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(frameId.current);
+    };
   }, [gameLoop]);
 
   return (

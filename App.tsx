@@ -60,7 +60,20 @@ const App: React.FC = () => {
     }
   }, [mode]);
 
+  const tryFullscreen = () => {
+    try {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else if ((document.documentElement as any).webkitRequestFullscreen) {
+        (document.documentElement as any).webkitRequestFullscreen();
+      }
+    } catch (e) {
+      // Fail silently if restricted
+    }
+  };
+
   const startGame = (gameMode: GameMode, level?: Level) => {
+    tryFullscreen();
     audioService.init(); 
     setGameId(prev => prev + 1); 
     setMode(gameMode);
@@ -127,6 +140,7 @@ const App: React.FC = () => {
   }, [settings.haptics]);
 
   const toggleSettings = (key: keyof Settings) => {
+    tryFullscreen();
     const newSettings = { ...settings, [key]: !settings[key] };
     setSettings(newSettings);
     storageService.saveSettings(newSettings);
@@ -134,6 +148,7 @@ const App: React.FC = () => {
   };
 
   const setAccent = (color: string) => {
+    tryFullscreen();
     const newSettings = { ...settings, accentColor: color };
     setSettings(newSettings);
     storageService.saveSettings(newSettings);
@@ -143,7 +158,7 @@ const App: React.FC = () => {
   const renderMenu = () => {
     const currentBest = settings.loopingBorders ? highScore.classicLooping : highScore.classicWalled;
     return (
-      <div className="relative flex flex-col items-center justify-center h-full p-6 space-y-8">
+      <div className="relative flex flex-col items-center justify-center h-full p-6 space-y-8" onClick={tryFullscreen}>
         <BackgroundSnake />
         
         <div className="z-10 text-center animate-in fade-in zoom-in duration-700">
@@ -165,14 +180,14 @@ const App: React.FC = () => {
             <i className="fas fa-play" style={{ color: onAccent }}></i> Classic Mode
           </button>
           <button 
-            onClick={() => { audioService.playClick(); setMode(GameMode.LEVEL_SELECT); }}
+            onClick={() => { tryFullscreen(); audioService.playClick(); setMode(GameMode.LEVEL_SELECT); }}
             className="m3-button-tonal-accented py-4 flex items-center justify-center gap-3"
           >
             <i className="fas fa-map"></i> Adventure Mode
           </button>
           <div className="flex gap-4">
             <button 
-              onClick={() => { audioService.playClick(); setMode(GameMode.SETTINGS); }}
+              onClick={() => { tryFullscreen(); audioService.playClick(); setMode(GameMode.SETTINGS); }}
               className="flex-1 m3-button-tonal py-3"
             >
               <i className="fas fa-cog mr-2"></i> Settings
@@ -185,7 +200,7 @@ const App: React.FC = () => {
             Best {settings.loopingBorders ? 'Looping' : 'Walled'}: <span className="text-white/80 font-bold text-base ml-1">{currentBest}</span>
           </div>
           <button 
-            onClick={() => toggleSettings('loopingBorders')}
+            onClick={() => { tryFullscreen(); toggleSettings('loopingBorders'); }}
             className="text-[10px] text-white/20 hover:text-white/50 uppercase tracking-[0.2em] px-4 py-1 rounded-full border border-white/5"
           >
             Switch to {settings.loopingBorders ? 'Walled' : 'Looping'}
@@ -196,7 +211,7 @@ const App: React.FC = () => {
   };
 
   const renderLevelSelect = () => (
-    <div className="flex flex-col h-full p-6 animate-in slide-in-from-right duration-300">
+    <div className="flex flex-col h-full p-6 animate-in slide-in-from-right duration-300" onClick={tryFullscreen}>
       <header className="flex items-center gap-4 mb-8">
         <button onClick={() => { audioService.playClick(); setMode(GameMode.MENU); }} className="text-2xl p-2"><i className="fas fa-arrow-left"></i></button>
         <h2 className="text-3xl font-bold">Select Level</h2>
@@ -232,7 +247,7 @@ const App: React.FC = () => {
   );
 
   const renderSettings = () => (
-    <div className="flex flex-col h-full p-6 animate-in slide-in-from-left duration-300">
+    <div className="flex flex-col h-full p-6 animate-in slide-in-from-left duration-300" onClick={tryFullscreen}>
       <header className="flex items-center gap-4 mb-8">
         <button onClick={() => { audioService.playClick(); setMode(GameMode.MENU); }} className="text-2xl p-2"><i className="fas fa-arrow-left"></i></button>
         <h2 className="text-3xl font-bold">Settings</h2>
@@ -305,7 +320,7 @@ const App: React.FC = () => {
   const renderGameOverlay = () => {
     if (state === GameState.PAUSED) {
       return (
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center z-50 animate-in fade-in duration-200">
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center z-50 animate-in fade-in duration-200" onClick={tryFullscreen}>
           <h2 className="text-5xl font-bold mb-8">PAUSED</h2>
           <button 
             onClick={() => { 
@@ -330,7 +345,7 @@ const App: React.FC = () => {
 
     if (state === GameState.GAMEOVER) {
       return (
-        <div className="absolute inset-0 bg-red-950/40 backdrop-blur-md flex flex-col items-center justify-center z-50 animate-in zoom-in duration-300">
+        <div className="absolute inset-0 bg-red-950/40 backdrop-blur-md flex flex-col items-center justify-center z-50 animate-in zoom-in duration-300" onClick={tryFullscreen}>
           <div className="text-6xl mb-4"><i className="fas fa-skull text-red-400"></i></div>
           <h2 className="text-5xl font-bold mb-2 text-red-200">GAME OVER</h2>
           <p className="text-red-200/60 mb-8">You hit something!</p>
@@ -355,7 +370,7 @@ const App: React.FC = () => {
 
     if (state === GameState.LEVEL_WON) {
       return (
-        <div className="absolute inset-0 bg-emerald-950/40 backdrop-blur-md flex flex-col items-center justify-center z-50 animate-in zoom-in duration-300">
+        <div className="absolute inset-0 bg-emerald-950/40 backdrop-blur-md flex flex-col items-center justify-center z-50 animate-in zoom-in duration-300" onClick={tryFullscreen}>
           <div className="text-6xl mb-4"><i className="fas fa-crown text-yellow-400"></i></div>
           <h2 className="text-5xl font-bold mb-2 text-emerald-100">VICTORY</h2>
           <p className="text-emerald-100/60 mb-8">{currentLevel?.name} Completed!</p>
@@ -382,7 +397,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[#1C1B1F] text-[#E6E1E5]">
+    <div 
+      className="h-screen w-screen overflow-hidden bg-[#1C1B1F] text-[#E6E1E5]"
+      onMouseDown={tryFullscreen}
+      onTouchStart={tryFullscreen}
+    >
       {mode === GameMode.MENU && renderMenu()}
       {mode === GameMode.LEVEL_SELECT && renderLevelSelect()}
       {mode === GameMode.SETTINGS && renderSettings()}
@@ -406,6 +425,7 @@ const App: React.FC = () => {
           {state === GameState.PLAYING && (
             <button 
               onClick={() => { 
+                tryFullscreen();
                 setState(GameState.PAUSED); 
                 audioService.playClick(); 
                 audioService.stopMusic(); 
