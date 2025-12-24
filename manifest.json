@@ -3,7 +3,7 @@
   "name": "Zen Snake Pro",
   "short_name": "Zen Snake",
   "description": "Premium, smooth snake game with classic and adventure modes.",
-  "start_url": "./",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#1c1b1f",
   "theme_color": "#1c1b1f",
