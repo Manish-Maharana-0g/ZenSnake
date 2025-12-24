@@ -172,7 +172,7 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
     }
 
-    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--m3-accent').trim() || COLORS.SNAKE_HEAD;
+    const accentColor = settings.accentColor || COLORS.SNAKE_HEAD;
 
     if (currentLevel?.obstacles) {
       ctx.fillStyle = COLORS.OBSTACLE;
@@ -245,7 +245,7 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
       ctx.fill();
       ctx.restore();
     }
-  }, [currentLevel]);
+  }, [currentLevel, settings.accentColor]);
 
   const gameLoop = useCallback((timestamp: number) => {
     if (gameState !== GameState.PLAYING) {
@@ -349,10 +349,10 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
       <canvas ref={canvasRef} className="bg-[#1C1B1F]" />
       <div className="absolute top-6 left-6 text-white font-bold text-2xl flex items-center gap-2 pointer-events-none">
         <span 
-          className="px-3 py-1 rounded-full border flex items-center gap-2"
+          className="px-4 py-2 rounded-full border flex items-center gap-2"
           style={{ 
-            backgroundColor: 'rgba(var(--m3-accent-rgb), 0.2)',
-            borderColor: 'rgba(var(--m3-accent-rgb), 0.3)'
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            borderColor: 'rgba(255, 255, 255, 0.1)'
           }}
         >
           <i className="fas fa-apple-whole text-red-400"></i>
@@ -361,10 +361,10 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
         
         {gameMode === GameMode.CLASSIC && (
           <span 
-            className="px-3 py-1 rounded-full border text-xs opacity-70 uppercase tracking-widest"
+            className="px-3 py-1 rounded-full border text-xs font-bold uppercase tracking-[0.1em] text-white/50"
             style={{ 
-              backgroundColor: 'rgba(var(--m3-accent-rgb), 0.1)',
-              borderColor: 'rgba(var(--m3-accent-rgb), 0.2)'
+              backgroundColor: 'rgba(255, 255, 255, 0.03)',
+              borderColor: 'rgba(255, 255, 255, 0.08)'
             }}
           >
             {settings.loopingBorders ? 'Looping' : 'Walled'}
@@ -373,10 +373,10 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
 
         {gameMode === GameMode.ADVENTURE && currentLevel && (
            <span 
-            className="px-3 py-1 rounded-full border text-sm"
+            className="px-3 py-1 rounded-full border text-xs font-bold uppercase tracking-[0.1em] text-white/50"
             style={{ 
-              backgroundColor: 'rgba(var(--m3-accent-rgb), 0.1)',
-              borderColor: 'rgba(var(--m3-accent-rgb), 0.2)'
+              backgroundColor: 'rgba(255, 255, 255, 0.03)',
+              borderColor: 'rgba(255, 255, 255, 0.08)'
             }}
            >
              Target: {currentLevel.targetLength}

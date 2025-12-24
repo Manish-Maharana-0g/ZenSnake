@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,18 +30,15 @@
       canvas {
         display: block;
       }
-      /* Material 3 Frosted Glass / Matte Translucent Card */
       .m3-card {
-        background-color: rgba(35, 33, 38, 0.72);
-        backdrop-filter: blur(32px) saturate(160%);
-        -webkit-backdrop-filter: blur(32px) saturate(160%);
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
         border-radius: 32px;
-        box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.05);
-        border: 1px solid rgba(var(--m3-accent-rgb), 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       }
       .m3-button-primary {
-        background-color: var(--m3-accent) !important;
-        color: var(--m3-on-accent) !important;
         border-radius: 100px;
         padding: 12px 24px;
         font-weight: 500;
@@ -52,8 +50,6 @@
         transform: scale(0.96);
         opacity: 0.9;
       }
-      
-      /* Settings Button Style - Neutral dark grey background with accent text */
       .m3-button-tonal {
         background-color: #2b2930 !important;
         color: var(--m3-accent) !important;
@@ -67,8 +63,6 @@
         background-color: #3b383e !important;
         transform: scale(0.98);
       }
-      
-      /* Adventure Mode Style - Tinted accent background */
       .m3-button-tonal-accented {
         background-color: rgba(var(--m3-accent-rgb), 0.12) !important;
         color: var(--m3-accent) !important;
@@ -82,7 +76,6 @@
         background-color: rgba(var(--m3-accent-rgb), 0.25) !important;
         transform: scale(0.98);
       }
-
       @keyframes floatTitle {
         0%, 100% { transform: translateY(0px); }
         50% { transform: translateY(-12px); }
@@ -104,7 +97,7 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -116,5 +109,6 @@
         });
       }
     </script>
-  </body>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>

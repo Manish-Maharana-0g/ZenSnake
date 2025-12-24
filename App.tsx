@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { GameMode, GameState, HighScore, Settings, Level } from './types';
 import { storageService } from './services/storageService';
@@ -23,12 +24,23 @@ const App: React.FC = () => {
   
   const musicStartTimeoutRef = useRef<number | null>(null);
 
-  // Apply accent color to CSS variables
+  // Map accents to their darker versions for contrast text/icons
+  const getOnAccent = (accent: string) => {
+    switch (accent.toUpperCase()) {
+      case '#D0BCFF': return '#381E72'; // Lavender
+      case '#A8E6CF': return '#003822'; // Mint
+      case '#FFD3B6': return '#452B00'; // Peach
+      case '#81D4FA': return '#003546'; // Sky
+      case '#FFF176': return '#454000'; // Gold
+      default: return '#381e72';
+    }
+  };
+
+  const onAccent = getOnAccent(settings.accentColor);
+
   useEffect(() => {
     document.documentElement.style.setProperty('--m3-accent', settings.accentColor);
     document.documentElement.style.setProperty('--m3-accent-rgb', hexToRgb(settings.accentColor));
-    const isLight = settings.accentColor === '#FFF176' || settings.accentColor === '#FFD3B6';
-    document.documentElement.style.setProperty('--m3-on-accent', isLight ? '#454000' : '#381e72');
   }, [settings.accentColor]);
 
   useEffect(() => {
@@ -136,15 +148,21 @@ const App: React.FC = () => {
         
         <div className="z-10 text-center animate-in fade-in zoom-in duration-700">
           <h1 className="text-7xl font-bold tracking-tighter text-white drop-shadow-2xl animate-float">ZEN SNAKE</h1>
-          <p className="text-[var(--m3-accent)] mt-2 font-medium tracking-widest uppercase opacity-80">Classic Relaxation</p>
+          <p 
+            className="mt-2 font-medium tracking-widest uppercase opacity-80 transition-colors duration-500"
+            style={{ color: settings.accentColor }}
+          >
+            Classic Relaxation
+          </p>
         </div>
         
         <div className="z-10 w-full max-w-sm m3-card p-8 flex flex-col space-y-4 animate-in slide-in-from-bottom-10 duration-500">
           <button 
             onClick={() => startGame(GameMode.CLASSIC)}
-            className="m3-button-primary text-xl py-4 flex items-center justify-center gap-3"
+            className="text-xl py-4 flex items-center justify-center gap-3 rounded-[100px] font-medium transition-all duration-300 shadow-lg active:scale-95"
+            style={{ backgroundColor: settings.accentColor, color: onAccent }}
           >
-            <i className="fas fa-play"></i> Classic Mode
+            <i className="fas fa-play" style={{ color: onAccent }}></i> Classic Mode
           </button>
           <button 
             onClick={() => { audioService.playClick(); setMode(GameMode.LEVEL_SELECT); }}
@@ -163,12 +181,12 @@ const App: React.FC = () => {
         </div>
 
         <div className="z-10 flex flex-col items-center gap-1">
-          <div className="text-center text-sm text-white/30 uppercase tracking-widest">
-            Best {settings.loopingBorders ? 'Looping' : 'Walled'}: <span className="text-white/60 font-medium">{currentBest}</span>
+          <div className="text-center text-sm text-white/40 uppercase tracking-[0.15em]">
+            Best {settings.loopingBorders ? 'Looping' : 'Walled'}: <span className="text-white/80 font-bold text-base ml-1">{currentBest}</span>
           </div>
           <button 
             onClick={() => toggleSettings('loopingBorders')}
-            className="text-[10px] text-[var(--m3-accent)]/40 hover:text-[var(--m3-accent)]/80 uppercase tracking-[0.2em] px-4 py-1 rounded-full border border-[var(--m3-accent)]/10"
+            className="text-[10px] text-white/20 hover:text-white/50 uppercase tracking-[0.2em] px-4 py-1 rounded-full border border-white/5"
           >
             Switch to {settings.loopingBorders ? 'Walled' : 'Looping'}
           </button>
@@ -295,13 +313,14 @@ const App: React.FC = () => {
               audioService.playClick(); 
               setTimeout(() => audioService.startMusic(false), 300);
             }}
-            className="m3-button-primary text-xl px-12 mb-4"
+            className="text-xl px-12 py-3 mb-4 rounded-full font-medium"
+            style={{ backgroundColor: settings.accentColor, color: onAccent }}
           >
             RESUME
           </button>
           <button 
             onClick={() => { audioService.playClick(); setMode(GameMode.MENU); audioService.stopMusic(); }}
-            className="m3-button-tonal bg-red-500/20 text-red-200 border border-red-500/30"
+            className="m3-button-tonal bg-red-500/20 text-red-200 border border-red-500/30 px-10 py-3 rounded-full"
           >
             QUIT GAME
           </button>
@@ -318,13 +337,14 @@ const App: React.FC = () => {
           <div className="flex gap-4">
             <button 
               onClick={() => startGame(mode, currentLevel)}
-              className="m3-button-primary px-10"
+              className="px-10 py-3 rounded-full font-medium"
+              style={{ backgroundColor: settings.accentColor, color: onAccent }}
             >
               RETRY
             </button>
             <button 
               onClick={() => { audioService.playClick(); setMode(GameMode.MENU); }}
-              className="m3-button-tonal px-10"
+              className="m3-button-tonal px-10 py-3 rounded-full"
             >
               MENU
             </button>
@@ -342,13 +362,14 @@ const App: React.FC = () => {
           <div className="flex gap-4">
             <button 
               onClick={() => { audioService.playClick(); setMode(GameMode.LEVEL_SELECT); }}
-              className="m3-button-primary px-10"
+              className="px-10 py-3 rounded-full font-medium"
+              style={{ backgroundColor: settings.accentColor, color: onAccent }}
             >
               NEXT LEVEL
             </button>
             <button 
               onClick={() => { audioService.playClick(); setMode(GameMode.MENU); }}
-              className="m3-button-tonal px-10"
+              className="m3-button-tonal px-10 py-3 rounded-full"
             >
               MENU
             </button>

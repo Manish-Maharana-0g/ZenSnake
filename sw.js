@@ -1,9 +1,10 @@
+
 const CACHE_NAME = 'zen-snake-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/index.tsx',
-  '/manifest.json',
+  './',
+  './index.html',
+  './index.tsx',
+  './manifest.json',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'
