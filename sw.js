@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'zen-snake-v3';
+const CACHE_NAME = 'zen-snake-v4';
 const STATIC_ASSETS = [
   './',
   'index.html',
@@ -36,18 +36,27 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Use a Network-First strategy for core application files and modules
-  // This ensures transpiled code is up-to-date while providing a reliable cache fallback.
+  // Handle navigation requests (e.g. opening the app)
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        // Fallback to cached index.html if network is unavailable
+        return caches.match('index.html') || caches.match('./');
+      })
+    );
+    return;
+  }
+
+  // Network-first strategy for dynamic application scripts
   if (
-    event.request.mode === 'navigate' || 
     url.pathname.endsWith('.tsx') || 
     url.pathname.endsWith('.ts') || 
-    url.pathname.endsWith('.js')
+    url.pathname.endsWith('.js') ||
+    url.origin === location.origin
   ) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          // If successful, cache the response and return it
           if (response.status === 200) {
             const responseToCache = response.clone();
             caches.open(CACHE_NAME).then((cache) => {
@@ -56,21 +65,10 @@ self.addEventListener('fetch', (event) => {
           }
           return response;
         })
-        .catch(() => {
-          // If network fails, try cache
-          return caches.match(event.request).then((cachedResponse) => {
-            if (cachedResponse) return cachedResponse;
-            
-            // If it's a navigation request and we're offline, return the root shell
-            if (event.request.mode === 'navigate') {
-              return caches.match('./') || caches.match('index.html');
-            }
-            return null;
-          });
-        })
+        .catch(() => caches.match(event.request))
     );
   } else {
-    // Cache-First strategy for other static assets (CSS, Fonts, CDN assets)
+    // Cache-first strategy for static resources (CDN files, fonts)
     event.respondWith(
       caches.match(event.request).then((response) => {
         return response || fetch(event.request).then((networkResponse) => {
