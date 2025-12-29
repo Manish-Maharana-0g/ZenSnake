@@ -26,81 +26,87 @@ export const LEVELS: Level[] = [
   {
     id: 1,
     name: "Grasslands",
-    targetLength: 15,
+    targetLength: 23,
     speed: 1.0,
     obstacles: [],
-    description: "A simple start. Just grow to length 15."
+    description: "The journey begins. Just grow to length 23."
   },
   {
     id: 2,
     name: "The Pillars",
-    targetLength: 20,
+    targetLength: 25,
     speed: 1.1,
     obstacles: [
-      { x: 4, y: 6 }, { x: 10, y: 6 },
-      { x: 4, y: 16 }, { x: 10, y: 16 }
+      { x: 3, y: 7 }, { x: 4, y: 7 }, { x: 3, y: 8 }, { x: 4, y: 8 },
+      { x: 11, y: 7 }, { x: 12, y: 7 }, { x: 11, y: 8 }, { x: 12, y: 8 },
+      { x: 3, y: 17 }, { x: 4, y: 17 }, { x: 3, y: 18 }, { x: 4, y: 18 },
+      { x: 11, y: 17 }, { x: 12, y: 17 }, { x: 11, y: 18 }, { x: 12, y: 18 }
     ],
-    description: "Watch out for the ancient pillars!"
+    description: "Navigate through the stone foundations."
   },
   {
     id: 3,
-    name: "Zig Zag",
-    targetLength: 25,
+    name: "Divided",
+    targetLength: 27,
     speed: 1.2,
     obstacles: [
-      { x: 8, y: 8 }, { x: 8, y: 9 }, { x: 8, y: 10 },
-      { x: 2, y: 15 }, { x: 3, y: 15 }, { x: 4, y: 15 },
-      { x: 12, y: 20 }, { x: 13, y: 20 }, { x: 14, y: 20 }
+      { x: 2, y: 12 }, { x: 3, y: 12 }, { x: 4, y: 12 }, { x: 5, y: 12 }, { x: 6, y: 12 },
+      { x: 10, y: 12 }, { x: 11, y: 12 }, { x: 12, y: 12 }, { x: 13, y: 12 }, { x: 14, y: 12 },
+      { x: 2, y: 13 }, { x: 14, y: 13 }, { x: 2, y: 14 }, { x: 14, y: 14 }
     ],
-    description: "Tight corners ahead."
+    description: "A horizontal divide test your precision."
   },
   {
     id: 4,
-    name: "The Corridor",
-    targetLength: 30,
+    name: "Snake Pit",
+    targetLength: 29,
     speed: 1.3,
     obstacles: [
-      { x: 5, y: 5 }, { x: 5, y: 6 }, { x: 5, y: 7 }, { x: 5, y: 8 }, { x: 5, y: 9 },
-      { x: 10, y: 12 }, { x: 10, y: 13 }, { x: 10, y: 14 }, { x: 10, y: 15 }, { x: 10, y: 16 }
+      { x: 7, y: 6 }, { x: 7, y: 7 }, { x: 7, y: 8 }, { x: 7, y: 9 }, { x: 7, y: 10 },
+      { x: 3, y: 13 }, { x: 4, y: 13 }, { x: 5, y: 13 }, { x: 6, y: 13 }, { x: 7, y: 13 },
+      { x: 7, y: 16 }, { x: 7, y: 17 }, { x: 7, y: 18 }, { x: 7, y: 19 }, { x: 7, y: 20 },
+      { x: 8, y: 13 }, { x: 9, y: 13 }, { x: 10, y: 13 }, { x: 11, y: 13 }, { x: 12, y: 13 }
     ],
-    description: "Navigate the narrow pathways."
+    description: "A cross-shaped blockade splits the arena."
   },
   {
     id: 5,
-    name: "The Cross",
-    targetLength: 35,
+    name: "Corridors",
+    targetLength: 31,
     speed: 1.4,
     obstacles: [
-      { x: 7, y: 10 }, { x: 7, y: 11 }, { x: 7, y: 12 }, { x: 7, y: 13 }, { x: 7, y: 14 },
-      { x: 5, y: 12 }, { x: 6, y: 12 }, { x: 8, y: 12 }, { x: 9, y: 12 }
+      { x: 5, y: 5 }, { x: 5, y: 6 }, { x: 5, y: 7 }, { x: 5, y: 8 }, { x: 5, y: 9 }, { x: 5, y: 10 },
+      { x: 10, y: 15 }, { x: 10, y: 16 }, { x: 10, y: 17 }, { x: 10, y: 18 }, { x: 10, y: 19 }, { x: 10, y: 20 },
+      { x: 3, y: 23 }, { x: 4, y: 23 }, { x: 5, y: 23 }, { x: 10, y: 23 }, { x: 11, y: 23 }, { x: 12, y: 23 }
     ],
-    description: "A central blockade. Stay focused."
+    description: "Narrow lanes require careful slithering."
   },
   {
     id: 6,
-    name: "Gauntlet",
-    targetLength: 40,
+    name: "Maze Walk",
+    targetLength: 33,
     speed: 1.6,
     obstacles: [
-      { x: 2, y: 6 }, { x: 2, y: 7 },
-      { x: 12, y: 6 }, { x: 12, y: 7 },
-      { x: 2, y: 20 }, { x: 2, y: 21 },
-      { x: 12, y: 20 }, { x: 12, y: 21 },
-      { x: 7, y: 13 }, { x: 7, y: 14 }
+      { x: 2, y: 5 }, { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 6, y: 5 },
+      { x: 6, y: 6 }, { x: 6, y: 7 }, { x: 6, y: 8 }, { x: 6, y: 9 },
+      { x: 10, y: 15 }, { x: 11, y: 15 }, { x: 12, y: 15 }, { x: 13, y: 15 },
+      { x: 10, y: 14 }, { x: 10, y: 13 }, { x: 10, y: 12 }, { x: 10, y: 11 },
+      { x: 4, y: 20 }, { x: 5, y: 20 }, { x: 6, y: 20 }, { x: 7, y: 20 }, { x: 8, y: 20 }
     ],
-    description: "High speed, high stakes."
+    description: "Intricate maze sections increase the difficulty."
   },
   {
     id: 7,
     name: "Zen Master",
-    targetLength: 50,
+    targetLength: 35,
     speed: 1.8,
     obstacles: [
-      { x: 1, y: 10 }, { x: 2, y: 10 }, { x: 3, y: 10 },
-      { x: 11, y: 10 }, { x: 12, y: 10 }, { x: 13, y: 10 },
-      { x: 7, y: 5 }, { x: 7, y: 6 }, { x: 7, y: 7 },
-      { x: 7, y: 18 }, { x: 7, y: 19 }, { x: 7, y: 20 }
+      { x: 1, y: 15 }, { x: 2, y: 15 }, { x: 3, y: 15 }, { x: 4, y: 15 },
+      { x: 11, y: 15 }, { x: 12, y: 15 }, { x: 13, y: 15 }, { x: 14, y: 15 },
+      { x: 7, y: 5 }, { x: 7, y: 6 }, { x: 7, y: 7 }, { x: 7, y: 8 },
+      { x: 7, y: 22 }, { x: 7, y: 23 }, { x: 7, y: 24 }, { x: 7, y: 25 },
+      { x: 4, y: 10 }, { x: 10, y: 10 }, { x: 4, y: 20 }, { x: 10, y: 20 }
     ],
-    description: "The ultimate test of precision."
+    description: "The ultimate trial. Reach 35 to master the game."
   }
 ];

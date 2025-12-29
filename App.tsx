@@ -162,7 +162,7 @@ const App: React.FC = () => {
         <BackgroundSnake />
         
         <div className="z-10 text-center animate-in fade-in zoom-in duration-700">
-          <h1 className="text-7xl font-bold tracking-tighter text-white drop-shadow-2xl animate-float">ZEN SNAKE</h1>
+          <h1 className="text-5xl font-bold tracking-tighter text-white drop-shadow-2xl animate-float">ZEN SNAKE</h1>
           <p 
             className="mt-2 font-medium tracking-widest uppercase opacity-80 transition-colors duration-500"
             style={{ color: settings.accentColor }}
