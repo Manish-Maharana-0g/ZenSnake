@@ -96,9 +96,9 @@ const App: React.FC = () => {
       setHighScore(prev => {
         const scoreKey = isLooping ? 'classicLooping' : 'classicWalled';
         if (score > prev[scoreKey]) {
-          const newScore = { ...prev, [scoreKey]: score };
-          storageService.saveHighScore(newScore);
-          return newScore;
+          const newHS = { ...prev, [scoreKey]: score };
+          storageService.saveHighScore(newHS);
+          return newHS;
         }
         return prev;
       });
@@ -122,12 +122,10 @@ const App: React.FC = () => {
     if (currentLevel) {
       setHighScore(prev => {
         if (!prev.levelsCompleted.includes(currentLevel.id)) {
-          const newScore = { 
-            ...prev, 
-            levelsCompleted: [...prev.levelsCompleted, currentLevel.id] 
-          };
-          storageService.saveHighScore(newScore);
-          return newScore;
+          const updatedLevels = [...prev.levelsCompleted, currentLevel.id];
+          const newHS = { ...prev, levelsCompleted: updatedLevels };
+          storageService.saveHighScore(newHS);
+          return newHS;
         }
         return prev;
       });
@@ -162,7 +160,7 @@ const App: React.FC = () => {
         <BackgroundSnake />
         
         <div className="z-10 text-center animate-in fade-in zoom-in duration-700">
-          <h1 className="text-5xl font-bold tracking-tighter text-white drop-shadow-2xl animate-float">ZEN SNAKE</h1>
+          <h1 className="text-6xl font-bold tracking-tighter text-white drop-shadow-2xl animate-float">ZEN SNAKE</h1>
           <p 
             className="mt-2 font-medium tracking-widest uppercase opacity-80 transition-colors duration-500"
             style={{ color: settings.accentColor }}

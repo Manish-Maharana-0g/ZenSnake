@@ -37,37 +37,41 @@ export const LEVELS: Level[] = [
     targetLength: 25,
     speed: 1.1,
     obstacles: [
-      { x: 3, y: 7 }, { x: 4, y: 7 }, { x: 3, y: 8 }, { x: 4, y: 8 },
-      { x: 11, y: 7 }, { x: 12, y: 7 }, { x: 11, y: 8 }, { x: 12, y: 8 },
-      { x: 3, y: 17 }, { x: 4, y: 17 }, { x: 3, y: 18 }, { x: 4, y: 18 },
-      { x: 11, y: 17 }, { x: 12, y: 17 }, { x: 11, y: 18 }, { x: 12, y: 18 }
+      { x: 5, y: 7 }, { x: 6, y: 7 }, { x: 5, y: 8 }, { x: 6, y: 8 },
+      { x: 15, y: 7 }, { x: 16, y: 7 }, { x: 15, y: 8 }, { x: 16, y: 8 },
+      { x: 5, y: 17 }, { x: 6, y: 17 }, { x: 5, y: 18 }, { x: 6, y: 18 },
+      { x: 15, y: 17 }, { x: 16, y: 17 }, { x: 15, y: 18 }, { x: 16, y: 18 },
+      { x: 10, y: 12 }, { x: 11, y: 12 }, { x: 10, y: 13 }, { x: 11, y: 13 }
     ],
-    description: "Navigate through the stone foundations."
+    description: "The stone structures grow in number."
   },
   {
     id: 3,
-    name: "Divided",
+    name: "The Divide",
     targetLength: 27,
     speed: 1.2,
     obstacles: [
       { x: 2, y: 12 }, { x: 3, y: 12 }, { x: 4, y: 12 }, { x: 5, y: 12 }, { x: 6, y: 12 },
-      { x: 10, y: 12 }, { x: 11, y: 12 }, { x: 12, y: 12 }, { x: 13, y: 12 }, { x: 14, y: 12 },
-      { x: 2, y: 13 }, { x: 14, y: 13 }, { x: 2, y: 14 }, { x: 14, y: 14 }
+      { x: 7, y: 12 }, { x: 8, y: 12 }, { x: 12, y: 12 }, { x: 13, y: 12 }, { x: 14, y: 12 },
+      { x: 15, y: 12 }, { x: 16, y: 12 }, { x: 17, y: 12 }, { x: 18, y: 12 },
+      { x: 10, y: 5 }, { x: 10, y: 6 }, { x: 10, y: 7 }, { x: 10, y: 17 }, { x: 10, y: 18 }, { x: 10, y: 19 }
     ],
-    description: "A horizontal divide test your precision."
+    description: "Horizontal and vertical barriers test your focus."
   },
   {
     id: 4,
-    name: "Snake Pit",
+    name: "Serpent Gate",
     targetLength: 29,
     speed: 1.3,
     obstacles: [
-      { x: 7, y: 6 }, { x: 7, y: 7 }, { x: 7, y: 8 }, { x: 7, y: 9 }, { x: 7, y: 10 },
-      { x: 3, y: 13 }, { x: 4, y: 13 }, { x: 5, y: 13 }, { x: 6, y: 13 }, { x: 7, y: 13 },
-      { x: 7, y: 16 }, { x: 7, y: 17 }, { x: 7, y: 18 }, { x: 7, y: 19 }, { x: 7, y: 20 },
-      { x: 8, y: 13 }, { x: 9, y: 13 }, { x: 10, y: 13 }, { x: 11, y: 13 }, { x: 12, y: 13 }
+      { x: 4, y: 4 }, { x: 4, y: 5 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 4 },
+      { x: 16, y: 4 }, { x: 16, y: 5 }, { x: 16, y: 6 }, { x: 15, y: 4 }, { x: 14, y: 4 },
+      { x: 4, y: 20 }, { x: 4, y: 21 }, { x: 4, y: 22 }, { x: 5, y: 22 }, { x: 6, y: 22 },
+      { x: 16, y: 20 }, { x: 16, y: 21 }, { x: 16, y: 22 }, { x: 15, y: 22 }, { x: 14, y: 22 },
+      { x: 10, y: 10 }, { x: 10, y: 11 }, { x: 11, y: 10 }, { x: 11, y: 11 },
+      { x: 10, y: 14 }, { x: 10, y: 15 }, { x: 11, y: 14 }, { x: 11, y: 15 }
     ],
-    description: "A cross-shaped blockade splits the arena."
+    description: "A series of gates tighten the arena."
   },
   {
     id: 5,
@@ -75,25 +79,30 @@ export const LEVELS: Level[] = [
     targetLength: 31,
     speed: 1.4,
     obstacles: [
-      { x: 5, y: 5 }, { x: 5, y: 6 }, { x: 5, y: 7 }, { x: 5, y: 8 }, { x: 5, y: 9 }, { x: 5, y: 10 },
-      { x: 10, y: 15 }, { x: 10, y: 16 }, { x: 10, y: 17 }, { x: 10, y: 18 }, { x: 10, y: 19 }, { x: 10, y: 20 },
-      { x: 3, y: 23 }, { x: 4, y: 23 }, { x: 5, y: 23 }, { x: 10, y: 23 }, { x: 11, y: 23 }, { x: 12, y: 23 }
+      { x: 5, y: 4 }, { x: 5, y: 5 }, { x: 5, y: 6 }, { x: 5, y: 7 }, { x: 5, y: 8 }, { x: 5, y: 9 }, { x: 5, y: 10 },
+      { x: 5, y: 14 }, { x: 5, y: 15 }, { x: 5, y: 16 }, { x: 5, y: 17 }, { x: 5, y: 18 }, { x: 5, y: 19 }, { x: 5, y: 20 },
+      { x: 15, y: 4 }, { x: 15, y: 5 }, { x: 15, y: 6 }, { x: 15, y: 7 }, { x: 15, y: 8 }, { x: 15, y: 9 }, { x: 15, y: 10 },
+      { x: 15, y: 14 }, { x: 15, y: 15 }, { x: 15, y: 16 }, { x: 15, y: 17 }, { x: 15, y: 18 }, { x: 15, y: 19 }, { x: 15, y: 20 },
+      { x: 10, y: 12 }, { x: 11, y: 12 }, { x: 9, y: 12 }
     ],
-    description: "Narrow lanes require careful slithering."
+    description: "Long parallel walls force linear movement."
   },
   {
     id: 6,
-    name: "Maze Walk",
+    name: "The Web",
     targetLength: 33,
     speed: 1.6,
     obstacles: [
-      { x: 2, y: 5 }, { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 6, y: 5 },
-      { x: 6, y: 6 }, { x: 6, y: 7 }, { x: 6, y: 8 }, { x: 6, y: 9 },
-      { x: 10, y: 15 }, { x: 11, y: 15 }, { x: 12, y: 15 }, { x: 13, y: 15 },
-      { x: 10, y: 14 }, { x: 10, y: 13 }, { x: 10, y: 12 }, { x: 10, y: 11 },
-      { x: 4, y: 20 }, { x: 5, y: 20 }, { x: 6, y: 20 }, { x: 7, y: 20 }, { x: 8, y: 20 }
+      { x: 4, y: 8 }, { x: 5, y: 8 }, { x: 6, y: 8 }, { x: 7, y: 8 }, { x: 8, y: 8 },
+      { x: 8, y: 4 }, { x: 8, y: 5 }, { x: 8, y: 6 }, { x: 8, y: 7 },
+      { x: 12, y: 8 }, { x: 13, y: 8 }, { x: 14, y: 8 }, { x: 15, y: 8 }, { x: 16, y: 8 },
+      { x: 12, y: 4 }, { x: 12, y: 5 }, { x: 12, y: 6 }, { x: 12, y: 7 },
+      { x: 4, y: 16 }, { x: 5, y: 16 }, { x: 6, y: 16 }, { x: 7, y: 16 }, { x: 8, y: 16 },
+      { x: 8, y: 17 }, { x: 8, y: 18 }, { x: 8, y: 19 }, { x: 8, y: 20 },
+      { x: 12, y: 16 }, { x: 13, y: 16 }, { x: 14, y: 16 }, { x: 15, y: 16 }, { x: 16, y: 16 },
+      { x: 12, y: 17 }, { x: 12, y: 18 }, { x: 12, y: 19 }, { x: 12, y: 20 }
     ],
-    description: "Intricate maze sections increase the difficulty."
+    description: "Intricate L-shapes create dangerous pockets."
   },
   {
     id: 7,
@@ -101,12 +110,13 @@ export const LEVELS: Level[] = [
     targetLength: 35,
     speed: 1.8,
     obstacles: [
-      { x: 1, y: 15 }, { x: 2, y: 15 }, { x: 3, y: 15 }, { x: 4, y: 15 },
-      { x: 11, y: 15 }, { x: 12, y: 15 }, { x: 13, y: 15 }, { x: 14, y: 15 },
-      { x: 7, y: 5 }, { x: 7, y: 6 }, { x: 7, y: 7 }, { x: 7, y: 8 },
-      { x: 7, y: 22 }, { x: 7, y: 23 }, { x: 7, y: 24 }, { x: 7, y: 25 },
-      { x: 4, y: 10 }, { x: 10, y: 10 }, { x: 4, y: 20 }, { x: 10, y: 20 }
+      { x: 10, y: 4 }, { x: 10, y: 5 }, { x: 10, y: 6 }, { x: 10, y: 7 }, { x: 10, y: 8 },
+      { x: 10, y: 16 }, { x: 10, y: 17 }, { x: 10, y: 18 }, { x: 10, y: 19 }, { x: 10, y: 20 },
+      { x: 4, y: 12 }, { x: 5, y: 12 }, { x: 6, y: 12 }, { x: 7, y: 12 }, { x: 8, y: 12 },
+      { x: 12, y: 12 }, { x: 13, y: 12 }, { x: 14, y: 12 }, { x: 15, y: 12 }, { x: 16, y: 12 },
+      { x: 4, y: 4 }, { x: 16, y: 4 }, { x: 4, y: 20 }, { x: 16, y: 20 },
+      { x: 3, y: 3 }, { x: 17, y: 3 }, { x: 3, y: 21 }, { x: 17, y: 21 }
     ],
-    description: "The ultimate trial. Reach 35 to master the game."
+    description: "The cross of trials. Reach 35 to master the game."
   }
 ];
